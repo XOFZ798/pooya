@@ -1,0 +1,31 @@
+این کد که به زبان سی‌شارپ نوشته شده، یک اسکریپت برای محیط بازی یونیتی است. در ادامه توضیحات مربوط به اجزای مختلف این کد آورده شده است:
+
+1. **تعریف کلاس و متغیرها**:
+   - `public class NewBehaviourScript : MonoBehaviour`: این خط یک کلاس جدید به نام `NewBehaviourScript` را تعریف می‌کند که از کلاس پایه `MonoBehaviour` ارث‌بری می‌کند. این کلاس می‌تواند به عنوان یک اسکریپت در یونیتی استفاده شود.
+   - `public GameObject spherePrefab;`: این متغیر public یک آبجکت از نوع `GameObject` را نگه‌داری می‌کند که به عنوان الگو (پریفاب) برای ایجاد کره‌ها استفاده خواهد شد.
+   - `public List<GameObject> sphereList;`: این متغیر یک لیست از کره‌ها را نگه‌داری می‌کند.
+
+2. **متد Start**:
+   - `void Start() { sphereList = new List<GameObject>(); }`: این متد زمانی که اسکریپت شروع به کار می‌کند (در آغاز بازی)، لیست `sphereList` را به عنوان یک لیست جدید از نوع `GameObject` مقداردهی اولیه می‌کند.
+
+3. **متد Update**:
+   - `void Update()`: این متد هر فریم بازی صدا زده می‌شود.
+   - `if (Input.GetKeyDown(KeyCode.A)) { AddSphere(); }`: اگر کلید 'A' فشرده شود، متد `AddSphere` صدا زده می‌شود که یک کره جدید به لیست اضافه می‌کند.
+   - `if (Input.GetKeyDown(KeyCode.D)) { RemoveLastSphere(); }`: اگر کلید 'D' فشرده شود، متد `RemoveLastSphere` صدا زده می‌شود که آخرین کره را از لیست حذف می‌کند.
+
+4. **متد AddSphere**:
+   - `void AddSphere() {...}`: این متد یک کره جدید ایجاد می‌کند. 
+   - `GameObject newSphere = Instantiate(spherePrefab);`: این خط یک نمونه جدید از پریفاب `spherePrefab` ایجاد می‌کند.
+   - `newSphere.transform.position = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0);`: این خط موقعیت کره جدید را به صورت تصادفی در مختصات X و Y تنظیم می‌کند.
+   - `sphereList.Add(newSphere);`: کره جدید به لیست اضافه می‌شود.
+   - `Debug.Log("کره اضافه شد ! تعداد کره ها :" + sphereList.Count);`: این خط تعداد کره‌ها را در کنسول نمایش می‌دهد.
+
+5. **متد RemoveLastSphere**:
+   - `void RemoveLastSphere() {...}`: این متد آخرین کره را از لیست حذف می‌کند.
+   - `if (sphereList.Count > 0) {...}`: اگر لیست کره‌ها خالی نباشد، آخرین کره را پیدا کرده و حذف می‌کند.
+   - `Destroy(lastSphere);`: این خط کره را از بازی حذف می‌کند.
+   - `sphereList.RemoveAt(sphereList.Count - 1);`: این خط کره حذف شده را از لیست خارج می‌کند.
+   - `Debug.Log("آخرین کره حذف شد! تعداد کره ها :" + sphereList.Count);`: تعداد کره‌ها را در کنسول نمایش می‌دهد.
+   - اگر لیست خالی باشد، پیام "لیست خالی است" در کنسول نشان داده می‌شود.
+
+به طور کلی، این اسکریپت به کاربر اجازه می‌دهد که با فشردن کلید 'A' کره‌های جدیدی اضافه کند و با فشردن کلید 'D' آخرین کره را حذف کند.
